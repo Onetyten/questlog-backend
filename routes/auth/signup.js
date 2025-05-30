@@ -36,12 +36,12 @@ router.post('/signup',async(req,res)=>{
         const hashedPassword = await bcrypt.hash(password,salt)
         const user = new userProfile({name,email,password:hashedPassword})
         const savedUser = await user.save()
-        Log.logAccount(`user ${savedUser.name} with id ${savedUser._id} created successfully}`, savedUser)
+        await Log.logAccount(`user ${savedUser.name} with id ${savedUser._id} created successfully}`, savedUser)
         return res.status(201).json({message:"User created successfully",user:{_id:savedUser._id,name:savedUser.name,email:savedUser.email}})
     } 
     catch (error) {
         console.error("Error during sign up",error)
-        Log.logAuthError("Error during sign up",error)
+        await Log.LogInfo("ERROR", "signup.js", `Error during sign up:${error.message}`)
         if (error.code === 11000){
             return res.status(409).json({message:"email already exists"})
         }

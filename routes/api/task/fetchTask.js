@@ -8,12 +8,12 @@ router.get("/fetch/:user_id", async (req, res) => {
     try {
         const { user_id } = req.params
         if (!user_id){
-            Log.LogError("user_id is required to get tasks")
+            await Log.LogInfo("ERROR","routes/api/task/fetchTask.js",`user_id is required to get tasks`)
             return res.status(400).json({message:"user_id is required to get tasks"})     
         }
         const tasks = await task.find({user_id})
         if (!tasks){
-            Log.LogError("No tasks found")
+            await Log.LogInfo("WARN","routes/api/task/fetchTask.js",`No tasks found`)
             return res.status(404).json({message:"No tasks found"})
         }
         res.status(200).json({message:"Tasks fetched successfully", tasks:tasks})
@@ -21,7 +21,7 @@ router.get("/fetch/:user_id", async (req, res) => {
     catch (error) {
         console.error(error)
         res.status(500).json({message:"Internal server error"})
-         Log.LogError("Error fetching tasks")
+        await Log.LogInfo("ERROR","routes/api/task/fetchTask.js",`Error fetching tasks: ${error.message}`)
     }
 
 

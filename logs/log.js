@@ -9,11 +9,9 @@ const __dirname = dirname(__filename);
 
 const logDir = __dirname
 const infoLog = path.join(logDir,'info.log')
-const errorLog = path.join(logDir,'error.log')
 const authDir = path.join(logDir,'auth')
 const signupLog = path.join(authDir,'signup.log')
 const signinLog = path.join(authDir,'signin.log')
-const authErrorLog = path.join(authDir,'authError.log')
 
 
 
@@ -52,44 +50,21 @@ async function logSignIn(message) {
     }
 }
 
-
-async function logAuthError(message, error) {
-    const timeStamp = getTimestamp()
-    ensureDirExists(authDir)
-    if (!fs.existsSync(authErrorLog)){
-        await fsPromises.writeFile(authErrorLog,`ACCOUNT_ERROR_LOG \n ${message}: ${error.message} at ${timeStamp}\n`)
-    }
-    else{
-        await fsPromises.appendFile(authErrorLog,`${message}: ${error.message} at ${timeStamp}\n`)
-    }
-}
-
-
-async function LogInfo(message){
+async function LogInfo(level,source,message){
     const timeStamp = getTimestamp()
     if (!fs.existsSync(infoLog)){
-        await fsPromises.writeFile(infoLog,`INFO_LOG \n message ${timeStamp} \n`)
+        await fsPromises.writeFile(infoLog,`INFO_LOG \n ${level}\n source : ${source} \n ${message}  at ${timeStamp} \n`)
     }
     else{
-        await fsPromises.appendFile(infoLog,`${message}  at ${timeStamp} \n`)
+        await fsPromises.appendFile(infoLog,`${level}\n source : ${source} \n ${message}  at ${timeStamp} \n`)
     }
 }
 
-
-async function LogError(error,message){
-    const timeStamp = getTimestamp()
-    if (!fs.existsSync(infoLog)){
-        await fsPromises.writeFile(errorLog,`INFO_LOG \n ${message}: ${error.message} at ${timeStamp} \n`)
-    }
-    else{
-        await fsPromises.appendFile(errorLog,`${message}: ${error.message} at ${timeStamp} \n`)
-    }
-}
 
 
 
 const Log = {
-    getTimestamp,LogInfo,LogError,logAccount,logAuthError,logSignIn
+    getTimestamp,LogInfo,logAccount,logSignIn
 }
 
 export default Log

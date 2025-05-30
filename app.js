@@ -42,16 +42,16 @@ async function startServer() {
         console.log("Attempting to connect to the questlog database")
         await mongoConnect()
         console.log("Connected to the questlog database")
-        await Log.LogInfo("\nConnected to the questlog database")
+        await Log.LogInfo("INFO","App.js","\nConnected to the questlog database")
 
         app.listen(PORT, async (error)=>{
             if (!error){
                 console.log("questlog is running on port",PORT)
-                await Log.LogInfo(`started server on port ${PORT}`)
+                await Log.LogInfo("INFO","App.js",`started server on port ${PORT}`)
             }
             else{
                 console.log("questlog has encountered an error")
-                Log.LogError(error,"questlog has encountered an error")
+                await Log.LogInfo("ERROR","App.js",`questlog has encountered an error: ${error.message}`)
             }
 
         } )
@@ -60,7 +60,7 @@ async function startServer() {
     }
     catch (error) {
         console.error("Failed to connect to the server",error)
-        Log.LogError(error,"questlog has encountered an error")
+        await Log.LogInfo("ERROR","App.js",`Failed to connect to the server: ${error.message}`)
         process.exit(1)
     }
     

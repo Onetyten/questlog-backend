@@ -35,7 +35,7 @@ router.post('/signin',async(req,res)=>{
             }
         }
         const token = jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'1d'})
-        Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
+        await Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
         return res.status(200).json({message:"login successful",token:token , user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
 
 
@@ -43,7 +43,7 @@ router.post('/signin',async(req,res)=>{
     
     catch (error) {
         res.status(500).json({message:error.message})
-        Log.logAuthError("Error during sign in",error)
+         await Log.LogInfo("ERROR", "signin.js", `Error during sign in : ${error.message}`)
     }
 
 }

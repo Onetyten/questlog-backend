@@ -8,7 +8,7 @@ router.delete("/delete/:_id", async (req, res) => {
     try{
         const {_id} = req.params
         if (!_id) {
-            Log.LogError("an id is required to delete a task","an id is required to delete a task")
+            await Log.LogInfo("ERROR","routes/api/task/deleteTask.js",`an id is required to delete a task`)
             return res.status(400).json({message:"an id is required to delete a task"})
            
         }
@@ -27,7 +27,7 @@ router.delete("/delete/:_id", async (req, res) => {
         }
         const deletedTask = await task.findByIdAndDelete(_id)
         if (!deletedTask) {
-            Log.LogError(`task not found`,"task not found")
+            await Log.LogInfo("ERROR","routes/api/task/deleteTask.js",`task not found`)
             return res.status(404).json("task not found")
         }
 
@@ -35,18 +35,18 @@ router.delete("/delete/:_id", async (req, res) => {
         for (const subTask of subTasks)
         {
             await task.findByIdAndDelete(subTask._id)
-            Log.LogInfo(`user ${subTask.user_id} deleted subtask ${subTask._id} \n ${subTask.title} successfully`)
+            await Log.LogInfo("INFO","routes/api/task/deleteTask.js",`user ${subTask.user_id} deleted subtask ${subTask._id} \n ${subTask.title} successfully`)
             console.log(`user ${subTask.user_id} deleted subtask ${subTask._id} \n ${subTask.title} successfully`)
         }
 
-        Log.LogInfo(`user ${deletedTask.user_id} deleted task ${deletedTask._id} \n ${deletedTask.title} successfully`)
+        await Log.LogInfo("INFO","routes/api/task/deleteTask.js",`user ${deletedTask.user_id} deleted task ${deletedTask._id} \n ${deletedTask.title} successfully`)
         return res.status(200).json({message:`user ${deletedTask.user_id} deleted a new task successfully`,data:deletedTask})
     }
     catch(error)
     {
         console.error(error)
         res.status(500).json("error deleting task")
-        Log.LogError(error,"error deleting task")
+        await Log.LogInfo("ERROR","routes/api/task/deleteTask.js",`error deleting task: ${error.message}`)
         return
     }
     
