@@ -1,0 +1,12 @@
+ACCOUNT_LOG 
+ user Kyle edwards with id 6838eecfc0b308cc15773ceb created successfully} at 2025-05-30 00:33:35 
+ user: {
+  name: 'Kyle edwards',
+  email: 'Edwards@gmail.com',
+  password: '$2b$10$/lnVwBSLgDAcmgb9Sy1EZOMRcFK4qqyIanfcsCe7tyJgfqeUuCHI2',
+  _id: new ObjectId('6838eecfc0b308cc15773ceb'),
+  createdAt: 2025-05-29T23:33:35.194Z,
+  updatedAt: 2025-05-29T23:33:35.194Z,
+  lastLogin: 2025-05-29T23:33:35.194Z,
+  __v: 0
+} 

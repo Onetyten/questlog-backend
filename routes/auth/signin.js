@@ -4,6 +4,7 @@ import express from "express"
 import userProfile from "../../schema/userSchema.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import Log from "../../logs/log.js"
 
 const app = express()
 const router = express.Router()
@@ -18,7 +19,7 @@ router.post('/signin',async(req,res)=>{
         const {email,password} = req.body
         const user = await userProfile.findOne({email:email})
         if (!user){
-            return res.status(404).json({message:"user not found sign up to create a Questlog account"})
+            return res.status(404).json({message:"user not found, please sign up to create a Questlog account"})
         }
         const match = await bcrypt.compare(password,user.password)
         if (!match){
@@ -34,11 +35,15 @@ router.post('/signin',async(req,res)=>{
             }
         }
         const token = jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'1d'})
+        Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
         return res.status(200).json({message:"login successful",token:token , user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
 
 
-    } catch (error) {
+    }
+    
+    catch (error) {
         res.status(500).json({message:error.message})
+        Log.logAuthError("Error during sign in",error)
     }
 
 }
