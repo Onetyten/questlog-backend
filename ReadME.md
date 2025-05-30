@@ -24,8 +24,8 @@ This is a MERN task management app that gamifies the process of completing tasks
 
 2. ### Install dependencies(make sure you have npm and node installed):
 
-   <pre>js
-   npm install
+   <pre>
+npm install
    </pre>
 
 3. ### Create a .env file following this format
@@ -35,9 +35,9 @@ This is a MERN task management app that gamifies the process of completing tasks
    JWT_SECRET = ?
 
 4. ### Start the server
-   <pre>js
+   ```bash
    npm run dev
-   </pre>
+   ```
 
 # API endpoints
 
@@ -52,32 +52,30 @@ This is a MERN task management app that gamifies the process of completing tasks
    - password (compulsory)
 
    Sample Request body
-    <pre>json
+    <pre>
    {
-   "name": "Nameless",
-   "email": "Nameless@gmail.com",
-   "password": "DragonRot"
+    "name": "Nameless",
+    "email": "Nameless@gmail.com",
+    "password": "DragonRot"
    }
    </pre>
 
    ### How to fetch (using fetch):
 
-   <pre>js
-   
-   const res = await fetch("/auth/signup", {
-   method: "POST",
-   headers: { "Content-Type": "application/json" },
-   body: JSON.stringify({ name, email, password })
-   });
-   
-   </pre>
+```javascript
+const res = await fetch("/auth/signup", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name, email, password }),
+});
+```
 
-   ### How to fetch (using axios):
+### How to fetch (using axios):
 
-   <pre>js
-   
-   const res = await axios.post("/auth/signup",{
-      name,email,password
-    });
-   
-   </pre>
+```javascript
+const res = await axios.post("/auth/signup", {
+  name,
+  email,
+  password,
+});
+```
