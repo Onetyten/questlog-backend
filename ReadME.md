@@ -24,9 +24,7 @@ This is a MERN task management app that gamifies the process of completing tasks
 
 2. ### Install dependencies(make sure you have npm and node installed):
 
-   <pre>
-npm install
-   </pre>
+   <pre> npm install </pre>
 
 3. ### Create a .env file following this format
 
