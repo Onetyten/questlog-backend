@@ -73,9 +73,5 @@ const res = await fetch("/auth/signup", {
 ### How to fetch (using axios):
 
 ```javascript
-const res = await axios.post("/auth/signup", {
-  name,
-  email,
-  password,
-});
+const res = await axios.post("/auth/signup", { name, email, password });
 ```
