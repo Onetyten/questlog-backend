@@ -60,7 +60,7 @@ npm install
    }
    </pre>
 
-   ### How to fetch (using fetch):
+### How to fetch (using fetch):
 
 ```javascript
 const res = await fetch("/auth/signup", {
