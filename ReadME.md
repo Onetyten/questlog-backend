@@ -53,27 +53,27 @@ Example: `Authorization: Bearer <your_jwt_token>`
 
 1. ## Signup
 
-   HTTP method: POST
-   URL: /auth/signup
-   Description: Registers a new user.
+   - HTTP method: POST
+   - URL: /auth/signup
+   - Description: Registers a new user.
 
    ### Body params:
 
    ### compulsory
 
-   - name
-   - email
-   - password
+- - name
+  - email
+  - password
 
-   Sample Request body
+  Sample Request body
 
-   ```json
-   {
-     "name": "Nameless",
-     "email": "Nameless@gmail.com",
-     "password": "DragonRot"
-   }
-   ```
+  ```json
+  {
+    "name": "Nameless",
+    "email": "Nameless@gmail.com",
+    "password": "DragonRot"
+  }
+  ```
 
 ### How to fetch (using fetch):
 
@@ -93,9 +93,9 @@ const res = await axios.post("/auth/signup", { name, email, password });
 
 2. ## Signin
 
-   HTTP method: POST
-   URL: /auth/signin
-   Description: Logs in an existing user.
+   - HTTP method: POST
+   - URL: /auth/signin
+   - Description: Logs in an existing user.
 
    ### Body params:
 
@@ -131,8 +131,8 @@ const res = await axios.post("/auth/signup", { email, password });
 
 3. ## add Task
 
-   HTTP method: POST
-   URL: /api/task/add
+   - HTTP method: POST
+   - URL: /api/task/add
 
    ### Body params:
 
@@ -192,8 +192,8 @@ const res = await axios.post("/auth/signup", {
 
 4. ## Delete Task
 
-   HTTP method: DELETE
-   URL: /api/task/delete/:id
+   - HTTP method: DELETE
+   - URL: /api/task/delete/:id
 
    ### Request params
 
@@ -217,8 +217,8 @@ const res = await axios.delete(`/api/task/delete/${_id}`);
 
 5. ## Fetch Tasks
 
-   HTTP method: GET
-   URL: /api/task/fetch/:user_id
+   - HTTP method: GET
+   - URL: /api/task/fetch/:user_id
 
    ### Request params
 
@@ -242,8 +242,8 @@ const res = await axios.get(`/api/task/fetch/${user_id}`);
 
 6. ## Fetch subtasks
 
-   HTTP method: GET
-   URL: /api/task/fetchchildren/:parent_id/:user_id
+   - HTTP method: GET
+   - URL: /api/task/fetchchildren/:parent_id/:user_id
 
    ### Request params
 
@@ -268,8 +268,8 @@ const res = await axios.get(`/api/task/fetchchildren/${parent_id}/${user_id}`);
 
 7. ## Edit Tasks
 
-   HTTP method: PATCH
-   URL: /api/task/edit/:id
+   - HTTP method: PATCH
+   - URL: /api/task/edit/:id
 
    ### Request params
 
