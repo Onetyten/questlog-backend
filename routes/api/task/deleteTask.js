@@ -4,42 +4,53 @@ import express from "express"
 import Log from "../../../logs/log.js"
 const router = express.Router()
 
-router.delete("/delete", async (req, res) => {
-    const {user_id,parent_id,title,priority} = req.body
+router.delete("/delete/:_id", async (req, res) => {
     try{
-        if (!TaskCheck(req,res)){
-            return
+        const {_id} = req.params
+        if (!_id) {
+            Log.LogError("an id is required to delete a task","an id is required to delete a task")
+            return res.status(400).json({message:"an id is required to delete a task"})
+           
         }
-        const newTask = new task({
-            user_id,
-            parent_id,
-            title,
-        })
-        await newTask.save()
-        Log.LogInfo(`user ${newTask.user_id} created a new task successfully`)
-        return res.status(201).json({message:`user ${newTask.user_id} created a new task successfully`,data:newTask})
+        async function getsubTasks(task_id,user_id)
+        {   
+            const children =  await task.find({parent_id:task_id,user_id:user_id})
+            let descendant = [...children]
+
+            for (const child of children)
+            {
+                const childDescendant = await getsubTasks(child._id,user_id)
+                descendant = descendant.concat(childDescendant)
+            }
+
+            return descendant            
+        }
+        const deletedTask = await task.findByIdAndDelete(_id)
+        if (!deletedTask) {
+            Log.LogError(`task not found`,"task not found")
+            return res.status(404).json("task not found")
+        }
+
+        const subTasks = await getsubTasks(_id,deletedTask.user_id)
+        for (const subTask of subTasks)
+        {
+            await task.findByIdAndDelete(subTask._id)
+            Log.LogInfo(`user ${subTask.user_id} deleted subtask ${subTask._id} \n ${subTask.title} successfully`)
+            console.log(`user ${subTask.user_id} deleted subtask ${subTask._id} \n ${subTask.title} successfully`)
+        }
+
+        Log.LogInfo(`user ${deletedTask.user_id} deleted task ${deletedTask._id} \n ${deletedTask.title} successfully`)
+        return res.status(200).json({message:`user ${deletedTask.user_id} deleted a new task successfully`,data:deletedTask})
     }
     catch(error)
     {
         console.error(error)
-        res.status(500).send("Server Error")
-        Log.LogError(error,"error adding task")
+        res.status(500).json("error deleting task")
+        Log.LogError(error,"error deleting task")
         return
     }
     
 })
 
-function TaskCheck(req,res){
-    const {user_id,title} = req.body
-    if (!user_id){
-        res.status(400).json("user_id is required, task has no assigned user")
-        return false
-    }
-    if (!title){
-        res.status(400).json("the task is empty")
-        return false
-    }
-    return true
-}
 
 export default router

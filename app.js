@@ -6,7 +6,11 @@ import cors from 'cors';
 import mongoConnect from './config/mongoConnect.js';
 import signupRoute from './routes/auth/signup.js'
 import signinRoute from './routes/auth/signin.js'
-import taskRoute from './routes/api/task/addTask.js'
+import taskAddRoute from './routes/api/task/addTask.js'
+import taskDeleteRoute from './routes/api/task/deleteTask.js'
+import taskFetchRoute from './routes/api/task/fetchTask.js'
+import taskUpdateRoute from './routes/api/task/patchTask.js'
+import taskFetchChildrenRoute from './routes/api/task/getchildren.js' 
 import Log from './logs/log.js';
 const PORT = process.env.PORT || 3100;
 
@@ -23,9 +27,14 @@ app.use(express.urlencoded({extended : true}))
 
 
 // auth routes
-app.use('/auth', signupRoute);
-app.use('/auth', signinRoute);
-app.use('/api/task',taskRoute)
+app.use('/auth', signupRoute)
+app.use('/auth', signinRoute)
+app.use('/api/task',taskAddRoute)
+app.use ('/api/task',taskDeleteRoute)
+app.use ('/api/task',taskFetchRoute)
+app.use ('/api/task',taskFetchChildrenRoute) 
+app.use ('/api/task',taskUpdateRoute)
+
 
 
 async function startServer() {
