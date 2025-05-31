@@ -15,12 +15,13 @@ async function GetDescendants(user_id,parent_id) {
     return descendants
 }
 
-router.get("/fetchchildren/:parent_id/:user_id", async (req, res) => {
+router.get("/fetchchildren/:parent_id", async (req, res) => {
     try {
-        const { user_id,parent_id} = req.params
-        if (!user_id){
-            await Log.LogInfo("ERROR","routes/api/task/getchildren.js",`user_id is required to get tasks`)
-            return res.status(400).json({message:"user_id is required to get tasks"})     
+        const {parent_id} = req.params
+        const user_id = req.user.id
+        if (!parent_id || parent_id === 'null' || parent_id === 'undefined'){
+            await Log.LogInfo("ERROR","routes/api/task/getchildren.js",`parent_id is required to get tasks`)
+            return res.status(400).json({message:"parent_id is required to get tasks"})
         }
         const tasks = await GetDescendants(user_id,parent_id)
         if (!tasks || tasks.length === 0){
@@ -31,8 +32,8 @@ router.get("/fetchchildren/:parent_id/:user_id", async (req, res) => {
     }
     catch (error) {
         console.error(error)
-        await Log.LogInfo("ERROR","routes/api/task/getchildren.js",`Error fetching tasks: ${error.message}`)
-        return res.status(500).json({message:"Internal server error"})
+        await Log.LogInfo("ERROR","routes/api/task/getchildren.js",`Error fetching child tasks for parent ${parent_id} and user ${user_id}: ${error.message}`)
+        return res.status(500).json({message:"Internal server error while fetching child tasks"})
         
     }
 

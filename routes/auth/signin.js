@@ -2,9 +2,11 @@ import dotenv from "dotenv"
 dotenv.config()
 import express from "express"
 import userProfile from "../../schema/userSchema.js"
+import crypto from "crypto"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import Log from "../../logs/log.js"
+
 
 const app = express()
 const router = express.Router()
@@ -26,17 +28,24 @@ router.post('/signin',async(req,res)=>{
             return res.status(400).json({message:"incorrect password"})
         }
 
-        user.lastLogin = Date.now()
-        await user.save()
 
+        user.lastLogin = Date.now()
         const payload ={
             user:{
                 id:user._id
             }
         }
         const token = jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'4h'})
+
+        const refreshToken = crypto.randomBytes(40).toString('hex')
+        const expiresAt = new Date(Date.now() + 6 * 4 * 7 * 24 * 60 * 60 * 1000)
+
+        user.refreshTokens.push({token:refreshToken,expiresAt:expiresAt})
+
+        await user.save()
+
         await Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
-        return res.status(200).json({message:"login successful",token:token , user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
+        return res.status(200).json({message:"login successful",token:token , refreshToken:refreshToken, user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
 
 
     }
@@ -53,11 +62,9 @@ router.post('/signin',async(req,res)=>{
 function signinSanity(req,res) {
     const {email,password} = req.body
     if(!email){
-        res.status(409).json({message:"email is required"})
         return false
     }
     if(!password){
-        res.status(409).json({message:"password is required"})
         return false
     }
     return true

@@ -4,16 +4,12 @@ import Log from "../../../logs/log.js"
 
 const router = express.Router()
 
-router.get("/fetch/:user_id", async (req, res) => {
+router.get("/fetch", async (req, res) => {
     try {
-        const { user_id } = req.params
-        if (!user_id){
-            await Log.LogInfo("ERROR","routes/api/task/fetchTask.js",`user_id is required to get tasks`)
-            return res.status(400).json({message:"user_id is required to get tasks"})     
-        }
+        const user_id = req.user.id
         const tasks = await task.find({user_id})
-        if (!tasks){
-            await Log.LogInfo("WARN","routes/api/task/fetchTask.js",`No tasks found`)
+        if (!tasks || tasks.length === 0){
+            await Log.LogInfo("INFO","routes/api/task/fetchTask.js",`No tasks found for user ${user_id}`)
             return res.status(404).json({message:"No tasks found"})
         }
         res.status(200).json({message:"Tasks fetched successfully", tasks:tasks})
