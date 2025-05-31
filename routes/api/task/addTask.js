@@ -4,7 +4,8 @@ import Log from "../../../logs/log.js"
 const router = express.Router()
 
 router.post("/add", async (req, res) => {
-    const {user_id,parent_id,title,priority} = req.body
+    const {parent_id,title,priority} = req.body
+    const user_id = req.user.id
     try{
         if (!TaskCheck(req,res)){
             return
@@ -13,6 +14,7 @@ router.post("/add", async (req, res) => {
             user_id,
             parent_id,
             title,
+            priority,
         })
         await newTask.save()
         await Log.LogInfo("INFO","routes/api/task/addTask.js",`user ${newTask.user_id} created a new task successfully`)
@@ -21,21 +23,16 @@ router.post("/add", async (req, res) => {
     catch(error)
     {
         console.error(error)
-        res.status(500).send("Server Error")
         await Log.LogInfo("ERROR","routes/api/task/addTask.js",`error adding task : ${error.message}`)
-        return
+        return res.status(500).send({message:"Server Error",error:error.message})  
     }
     
 })
 
 function TaskCheck(req,res){
-    const {user_id,title} = req.body
-    if (!user_id){
-        res.status(400).json("user_id is required, task has no assigned user")
-        return false
-    }
+    const {title} = req.body
     if (!title){
-        res.status(400).json("the task is empty")
+        res.status(400).json({message:"the task is empty"})
         return false
     }
     return true
