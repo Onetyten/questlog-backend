@@ -8,6 +8,8 @@ import jwt from "jsonwebtoken"
 import Log from "../../logs/log.js"
 
 
+
+
 const app = express()
 const router = express.Router()
 
@@ -45,7 +47,7 @@ router.post('/signin',async(req,res)=>{
         await user.save()
 
         await Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
-        return res.status(200).json({message:"login successful",token:token , refreshToken:refreshToken, user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
+        return res.status(200).json({message:"login successful",token:token , refreshToken:user.refreshTokens[user.refreshTokens.length-1], user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
 
 
     }

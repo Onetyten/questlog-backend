@@ -12,6 +12,7 @@ import taskDeleteRoute from './routes/api/task/deleteTask.js'
 import taskFetchRoute from './routes/api/task/fetchTask.js'
 import taskUpdateRoute from './routes/api/task/patchTask.js'
 import taskFetchChildrenRoute from './routes/api/task/getchildren.js' 
+import refreshAccessTokenRoute from './routes/auth/refreshToken.js'
 import Log from './logs/log.js';
 const PORT = process.env.PORT || 3100;
 
@@ -29,6 +30,8 @@ app.use(express.urlencoded({extended : true}))
 // auth routes
 app.use('/auth', signupRoute)
 app.use('/auth', signinRoute)
+app.use('/auth',refreshAccessTokenRoute)
+
 
 
 app.use('/api',Authorization)

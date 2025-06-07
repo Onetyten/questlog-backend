@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'url';
-import fs from 'fs'
+import * as fs from 'fs'; // Changed from 'node:fs'
 import path,{dirname} from 'path'
-import fsPromises from 'fs/promises'
+const { promises: fsPromises } = fs; // Get promises API from the main fs module
 import date from 'date-and-time'
 
 const __filename = fileURLToPath(import.meta.url);
