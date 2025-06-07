@@ -26,7 +26,9 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
-
+app.get('/',(req,res)=>{
+    res.status(200).json({message:"Questlog is running successfully,let the adventures begin "})
+})
 // auth routes
 app.use('/auth', signupRoute)
 app.use('/auth', signinRoute)
