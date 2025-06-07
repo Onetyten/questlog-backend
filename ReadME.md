@@ -130,15 +130,14 @@ const res = await axios.post("/auth/signup", { email, password });
 ```
 
 3. ## add Task
-
    - HTTP method: POST
    - URL: /api/task/add
+    This operation requires a token in the request header.
 
    ### Body params:
 
    ### compulsory
 
-   - user_id (compulsory)
    - title (compulsory)
 
    ### optional
@@ -151,7 +150,6 @@ const res = await axios.post("/auth/signup", { email, password });
    Sample Request body
     <pre>
    {
-    "user_id": "6689567f",
     "title": "Go to sleep"
     "parent_id": "6689672ca",
     "status": "pending",
@@ -165,9 +163,11 @@ const res = await axios.post("/auth/signup", { email, password });
 ```javascript
 const res = await fetch("/auth/signup", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
+   headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`, 
+  },
   body: JSON.stringify({
-    user_id,
     title,
     parent_id,
     status,
@@ -181,22 +181,20 @@ const res = await fetch("/auth/signup", {
 
 ```javascript
 const res = await axios.post("/auth/signup", {
-  user_id,
   title,
   parent_id,
   status,
   priority,
   dueDate,
-});
+},{headers:{Autorization:`Bearer ${Token}`}});
 ```
 
 4. ## Delete Task
 
    - HTTP method: DELETE
    - URL: /api/task/delete/:id
-
+  This operation requires a token in the request header.
    ### Request params
-
    ### compulsory
 
    - id (task id)
@@ -206,64 +204,67 @@ const res = await axios.post("/auth/signup", {
 ```javascript
 const res = await fetch(`/api/task/delete/${_id}`, {
   method: "DELETE",
+    headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`,
+  },
 });
 ```
 
 ### How to fetch (using axios):
 
 ```javascript
-const res = await axios.delete(`/api/task/delete/${_id}`);
+const res = await axios.delete(`/api/task/delete/${_id}`,{headers:{Autorization:`Bearer ${Token}`}});
 ```
 
 5. ## Fetch Tasks
 
    - HTTP method: GET
-   - URL: /api/task/fetch/:user_id
-
-   ### Request params
-
-   ### compulsory
-
-   - user_id
+   - URL: /api/task/fetch
+    This operation requires a token in the request header.
 
 ### How to fetch (using fetch):
 
 ```javascript
-const res = await fetch(`/api/task/fetch/${user_id}`, {
+const res = await fetch(`/api/task/fetch`, {
   method: "GET",
+    headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`,
+  },
 });
 ```
 
 ### How to fetch (using axios):
 
 ```javascript
-const res = await axios.get(`/api/task/fetch/${user_id}`);
+const res = await axios.get(`/api/task/fetch`,{headers:{Autorization:`Bearer ${Token}`}});
 ```
 
 6. ## Fetch subtasks
 
    - HTTP method: GET
-   - URL: /api/task/fetchchildren/:parent_id/:user_id
+   - URL: /api/task/fetchchildren/:parent_id
+     This operation requires a token in the request header.
 
    ### Request params
-
    ### compulsory
-
-   - user_id (id of the user)
    - parent_id (id of the parent task to have its subtasks fetched)
 
 ### How to fetch (using fetch):
-
 ```javascript
-const res = await fetch(`/api/task/fetchchildren/${parent_id}/${user_id}`, {
+const res = await fetch(`/api/task/fetchchildren/${parent_id}`, {
   method: "GET",
+    headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`,
 });
 ```
 
 ### How to fetch (using axios):
 
 ```javascript
-const res = await axios.get(`/api/task/fetchchildren/${parent_id}/${user_id}`);
+const res = await axios.get(`/api/task/fetchchildren/${parent_id}`,{headers:{Autorization:`Bearer ${Token}`}});
 ```
 
 7. ## Edit Tasks
@@ -303,7 +304,10 @@ const res = await axios.get(`/api/task/fetchchildren/${parent_id}/${user_id}`);
 ```javascript
 const res = await fetch("/auth/signup", {
   method: "PATCH",
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`, 
+  },
   body: JSON.stringify({ title, parent_id, status, priority, dueDate }),
 });
 ```
@@ -317,5 +321,41 @@ const res = await axios.patch("/auth/signup", {
   status,
   priority,
   dueDate,
+}.{headers:{Autorization:`Bearer ${Token}`}});
+```
+
+8. ## Refresh access token
+   - HTTP method: POST
+   - URL: /api/auth/refreshAccesstoken
+
+   ### Body params:
+   ### compulsory
+   - refreshToken
+
+   Sample Request body
+    <pre>
+   {
+    "refreshToken": "6689672cahdhusjdhfffhff",
+   }
+
+   </pre>
+
+### How to fetch (using fetch):
+
+```javascript
+const res = await fetch("/auth/refreshAccesstoken", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ refreshToken}),
+});
+```
+
+### How to fetch (using axios):
+
+```javascript
+const res = await axios.patch("/auth/signup", {
+  refreshToken
 });
 ```
