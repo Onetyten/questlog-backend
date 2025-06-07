@@ -314,3 +314,167 @@ Connected to the questlog database  at 2025-06-07 01:22:43
 INFO
  source : App.js 
  started server on port 3100  at 2025-06-07 01:22:43 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:14:21 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task successfully  at 2025-06-07 02:14:21 
+INFO
+ source : App.js 
+ 
+Connected to the questlog database  at 2025-06-07 02:16:31 
+INFO
+ source : App.js 
+ started server on port 3100  at 2025-06-07 02:16:31 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:16:35 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 684392f330c8a71557d2d1c4 
+ and title Wake up by 6 successfully  at 2025-06-07 02:16:36 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:17:35 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843932f30c8a71557d2d1c6 
+ and title Talk to captain levi successfully  at 2025-06-07 02:17:35 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:18:06 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843934e30c8a71557d2d1c8 
+ and title Talk to commander hange successfully  at 2025-06-07 02:18:06 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:18:39 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843936f30c8a71557d2d1ca 
+ and title Start the rumbling successfully  at 2025-06-07 02:18:40 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:20:23 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 684393d730c8a71557d2d1cc 
+ and title Get ODM gear successfully  at 2025-06-07 02:20:23 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:21:14 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843940a30c8a71557d2d1ce 
+ and title Get Mikasa successfully  at 2025-06-07 02:21:14 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:21:54 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843943230c8a71557d2d1d0 
+ and title Punch Armin successfully  at 2025-06-07 02:21:54 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:22:34 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843945a30c8a71557d2d1d2 
+ and title Go to armins house successfully  at 2025-06-07 02:22:34 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/add  at 2025-06-07 02:23:39 
+INFO
+ source : routes/api/task/addTask.js 
+ user 6843909c9ec3a5a31fb6117a created a new task with id 6843949b30c8a71557d2d1d4 
+ and title Look at the stars successfully  at 2025-06-07 02:23:40 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/delete/6843949b30c8a71557d2d1d4  at 2025-06-07 02:24:07 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/delete/6843949b30c8a71557d2d1d4  at 2025-06-07 02:24:14 
+INFO
+ source : routes/api/task/deleteTask.js 
+ user 6843909c9ec3a5a31fb6117a deleted task 6843949b30c8a71557d2d1d4 
+ Look at the stars successfully  at 2025-06-07 02:24:14 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/fetch  at 2025-06-07 02:24:48 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/fetchchildren/6843936f30c8a71557d2d1ca  at 2025-06-07 02:26:12 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/edit/6843945a30c8a71557d2d1d2  at 2025-06-07 02:28:42 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/edit/6843945a30c8a71557d2d1d2  at 2025-06-07 02:28:47 
+INFO
+ source : routes/api/task/patchTask.js 
+ title updated from: 
+ Go to armins house to 
+ Youngling slayer 3000  at 2025-06-07 02:28:48 
+ERROR
+ source : routes/api/task/patchTask.js 
+ You can't parent this task to its child  at 2025-06-07 02:28:49 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/edit/6843945a30c8a71557d2d1d2  at 2025-06-07 02:29:28 
+INFO
+ source : routes/api/task/patchTask.js 
+ title updated from: 
+ Go to armins house to 
+ Youngling slayer 3000  at 2025-06-07 02:29:28 
+ERROR
+ source : routes/api/task/patchTask.js 
+ You can't parent this task to its child  at 2025-06-07 02:29:29 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/edit/6843945a30c8a71557d2d1d2  at 2025-06-07 02:29:32 
+INFO
+ source : routes/api/task/patchTask.js 
+ title updated from: 
+ Go to armins house to 
+ Youngling slayer 3000  at 2025-06-07 02:29:33 
+ERROR
+ source : routes/api/task/patchTask.js 
+ You can't parent this task to its child  at 2025-06-07 02:29:33 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/task/edit/6843945a30c8a71557d2d1d2  at 2025-06-07 02:29:47 
+INFO
+ source : routes/api/task/patchTask.js 
+ title updated from: 
+ Go to armins house to 
+ Youngling slayer 3000  at 2025-06-07 02:29:47 
+INFO
+ source : routes/api/task/patchTask.js 
+ status updated from pending to pending  at 2025-06-07 02:29:47 
+INFO
+ source : routes/api/task/patchTask.js 
+ priority updated from medium to medium  at 2025-06-07 02:29:47 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/auth/refreshAccesstoken  at 2025-06-07 02:31:14 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/auth/refreshAccesstoken  at 2025-06-07 02:31:21 
+INFO
+ source : routes/auth/authorization.js 
+ User 6843909c9ec3a5a31fb6117a authenticated for request to /api/auth/refreshAccesstoken  at 2025-06-07 02:31:38 
+WARN
+ source : logs/auth/authorization.js 
+ Authorization header not found,request to /api/auth/refreshAccesstoken is not authorized  at 2025-06-07 02:32:07 
+ERROR
+ source : refreshToken.js 
+ User not find while verifying refresh token  at 2025-06-07 02:32:29 
+INFO
+ source : App.js 
+ 
+Connected to the questlog database  at 2025-06-07 02:33:06 
+INFO
+ source : App.js 
+ started server on port 3100  at 2025-06-07 02:33:06 

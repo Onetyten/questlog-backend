@@ -17,7 +17,7 @@ router.post("/add", async (req, res) => {
             priority,
         })
         await newTask.save()
-        await Log.LogInfo("INFO","routes/api/task/addTask.js",`user ${newTask.user_id} created a new task successfully`)
+        await Log.LogInfo("INFO","routes/api/task/addTask.js",`user ${newTask.user_id} created a new task with id ${newTask._id} \n and title ${newTask.title} successfully`)
         return res.status(201).json({message:`user ${newTask.user_id} created a new task successfully`,data:newTask})
     }
     catch(error)

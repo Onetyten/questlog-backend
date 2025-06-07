@@ -161,7 +161,7 @@ const res = await axios.post("/auth/signup", { email, password });
 ### How to fetch (using fetch):
 
 ```javascript
-const res = await fetch("/auth/signup", {
+const res = await fetch("/api/task/add", {
   method: "POST",
    headers: {
     "Content-Type": "application/json",
@@ -180,7 +180,7 @@ const res = await fetch("/auth/signup", {
 ### How to fetch (using axios):
 
 ```javascript
-const res = await axios.post("/auth/signup", {
+const res = await axios.post("/api/task/add", {
   title,
   parent_id,
   status,
