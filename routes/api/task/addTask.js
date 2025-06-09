@@ -18,13 +18,13 @@ router.post("/add", async (req, res) => {
         })
         await newTask.save()
         await Log.LogInfo("INFO","routes/api/task/addTask.js",`user ${newTask.user_id} created a new task with id ${newTask._id} \n and title ${newTask.title} successfully`)
-        return res.status(201).json({message:`user ${newTask.user_id} created a new task successfully`,data:newTask})
+        return res.status(201).json({message:`user ${newTask.user_id} created a new task successfully`,data:newTask.toObject(),success:true})
     }
     catch(error)
     {
         console.error(error)
         await Log.LogInfo("ERROR","routes/api/task/addTask.js",`error adding task : ${error.message}`)
-        return res.status(500).send({message:"Server Error",error:error.message})  
+        return res.status(500).send({message:"Server Error",error:error.message,success:false})  
     }
     
 })
@@ -32,7 +32,7 @@ router.post("/add", async (req, res) => {
 function TaskCheck(req,res){
     const {title} = req.body
     if (!title){
-        res.status(400).json({message:"the task is empty"})
+        res.status(400).json({message:"the task is empty",success:false})
         return false
     }
     return true

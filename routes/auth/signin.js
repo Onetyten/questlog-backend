@@ -23,11 +23,11 @@ router.post('/signin',async(req,res)=>{
         const {email,password} = req.body
         const user = await userProfile.findOne({email:email})
         if (!user){
-            return res.status(404).json({message:"user not found, please sign up to create a Questlog account"})
+            return res.status(404).json({message:"user not found, please sign up to create a Questlog account",success:false})
         }
         const match = await bcrypt.compare(password,user.password)
         if (!match){
-            return res.status(400).json({message:"incorrect password"})
+            return res.status(400).json({message:"incorrect password",success:false})
         }
 
 
@@ -47,13 +47,13 @@ router.post('/signin',async(req,res)=>{
         await user.save()
 
         await Log.logSignIn(`user ${user.name} with id ${user._id} has logged in`)
-        return res.status(200).json({message:"login successful",token:token , refreshToken:user.refreshTokens[user.refreshTokens.length-1], user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
+        return res.status(200).json({message:"login successful",success:true,token:token , refreshToken:user.refreshTokens[user.refreshTokens.length-1], user:{id:user._id,name:user.name,email:user.email,lastLogin:user.lastLogin}})
 
 
     }
     
     catch (error) {
-        res.status(500).json({message:error.message})
+        res.status(500).json({message:error.message,success:false})
          await Log.LogInfo("ERROR", "signin.js", `Error during sign in : ${error.message}`)
     }
 
