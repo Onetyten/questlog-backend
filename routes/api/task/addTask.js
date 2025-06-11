@@ -4,7 +4,7 @@ import Log from "../../../logs/log.js"
 const router = express.Router()
 
 router.post("/add", async (req, res) => {
-    const {parent_id,title,priority} = req.body
+    const {parent_id,title,priority,dueDate} = req.body
     const user_id = req.user.id
     try{
         if (!TaskCheck(req,res)){
