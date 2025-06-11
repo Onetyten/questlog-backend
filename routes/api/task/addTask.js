@@ -15,6 +15,7 @@ router.post("/add", async (req, res) => {
             parent_id,
             title,
             priority,
+            dueDate
         })
         await newTask.save()
         await Log.LogInfo("INFO","routes/api/task/addTask.js",`user ${newTask.user_id} created a new task with id ${newTask._id} \n and title ${newTask.title} successfully`)
