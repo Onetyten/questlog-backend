@@ -8,6 +8,9 @@ router.get("/fetch", async (req, res) => {
     try {
         const sortBy = req.query.sortBy || "createdAt"
         const order = req.query.order === "desc"? - 1 : 1
+        const user_id = req.user.id
+        const filter = {user_id}
+
 
         if (req.query.priority){
             filter.priority = req.query.priority
@@ -44,8 +47,6 @@ router.get("/fetch", async (req, res) => {
             end.setHours(23, 59, 59, 999);
             filter.dueDate = { $gte: start, $lt: end };
         }
-        const user_id = req.user.id
-        const filter = {user_id}
 
 
 
