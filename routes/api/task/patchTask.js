@@ -33,7 +33,7 @@ router.patch("/edit/:_id", async (req, res) => {
                 let descendants = [...children]
             
                 for (const child of children){
-                    const childDescendant = await GetDescendants(task_id,child._id)
+                    const childDescendant = await GetDescendants(child._id,user_id)
                     descendants = descendants.concat(childDescendant)
                 }
                 return descendants
