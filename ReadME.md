@@ -241,6 +241,57 @@ const res = await fetch(`/api/task/fetch`, {
 const res = await axios.get(`/api/task/fetch`,{headers:{Autorization:`Bearer ${Token}`}});
 ```
 
+### how to sort and filter tasks (Optional)
+
+
+### Query Parameters
+
+You can use any combination of the following query parameters to **sort** or **filter** tasks:
+
+| Query Parameter | Type     | Description                                                                 |
+|------------------|----------|-----------------------------------------------------------------------------|
+| `sortBy`         | `string` | Field to sort by (e.g., `title`, `createdAt`, `dueDate`)                    |
+| `order`          | `string` | Sorting order: `"asc"` (default) or `"desc"`                                |
+| `priority`       | `string` | Filter tasks by priority (e.g., `high`, `medium`, `low`)                    |
+| `status`         | `string` | Filter tasks by status (e.g., `pending`, `done`)                            |
+| `today`          | `true`   | Include tasks due **today** only                                            |
+| `tomorrow`       | `true`   | Include tasks due **tomorrow** only                                         |
+| `week`           | `true`   | Include tasks due **within the next 7 days**, including today               |
+
+> You can combine filters like:  
+> `/api/task/fetch?priority=high&status=pending&sortBy=title&order=desc`
+
+---
+
+### 🧪 Example (Using Fetch):
+
+
+```javascript
+const res = await fetch(`/api/task/fetch?sortBy=title&order=asc&priority=high`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${Token}`,
+  },
+});
+```
+
+### 🧪 Example (Using axios):
+
+
+```javascript
+  const res = await axios.get(`/api/task/fetch?status=pending&today=true`, {
+    headers: {
+      Authorization: `Bearer ${Token}`,
+    },
+  });
+```
+
+
+
+
+
+
 6. ## Fetch subtasks
 
    - HTTP method: GET
