@@ -96,8 +96,6 @@ router.patch("/edit/:_id", async (req, res) => {
         return res.status(500).json({message:"Error updating tasks", success:false})
         
     }
-    
-
 })
 
 export default router

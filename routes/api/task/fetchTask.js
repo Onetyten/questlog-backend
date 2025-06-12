@@ -44,10 +44,11 @@ router.get("/fetch", async (req, res) => {
             end.setHours(23, 59, 59, 999);
             filter.dueDate = { $gte: start, $lt: end };
         }
+        const user_id = req.user.id
         const filter = {user_id}
 
 
-        const user_id = req.user.id
+
         const tasks = await task.find(filter).sort({[sortBy]:order})
         if (!tasks || tasks.length === 0){
             await Log.LogInfo("INFO","routes/api/task/fetchTask.js",`No tasks found for user ${user_id}`)
