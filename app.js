@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3100;
 // make my backend accessible to all domains
 app.use(
     cors(
-        {origin : "http://localhost:3000" },
+        {origin : "*" },
     )
 )
 app.use(express.json())
