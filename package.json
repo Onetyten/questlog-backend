@@ -8,6 +8,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
+    "test": "cross-env NODE_ENV=test jest",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -15,6 +16,7 @@
     "bcrypt": "^6.0.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "date-and-time": "^3.6.0",
     "debug": "~2.6.9",
     "dotenv": "^16.5.0",
@@ -27,6 +29,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.27.2",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.18",
     "@types/debug": "^4.1.12",
@@ -35,7 +38,11 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.21",
+    "babel-jest": "^30.0.0",
+    "jest": "^30.0.0",
+    "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.1.10",
+    "supertest": "^7.1.1",
     "typescript": "^5.8.3"
   }
 }
