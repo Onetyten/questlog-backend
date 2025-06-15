@@ -2,6 +2,9 @@
 
 This is a MERN task management app that gamifies the process of completing tasks and supports hierarchical task assignment, allowing the breakdown of tasks into smaller, more manageable sub-tasks.
 
+## The frontend of this application
+https://questlog-gules.vercel.app/
+
 ## Tech Stack
 
 - NodeJS
