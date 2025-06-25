@@ -1,6 +1,7 @@
 import express from "express";
 import task from "../../../schema/taskSchema.js";
 import Log from "../../../logs/log.js";
+import mongoConnect from "../../../config/mongoConnect.js";
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ async function GetDescendants(user_id, parent_id) {
 }
 
 router.get("/fetchchildren/:parent_id", async (req, res) => {
+  await mongoConnect()
   const { parent_id } = req.params;
   const user_id = req.user.id;
 
@@ -39,7 +41,7 @@ router.get("/fetchchildren/:parent_id", async (req, res) => {
   {
     console.error(error);
     await Log.LogInfo( "ERROR", "routes/api/task/getchildren.js", `Error fetching child tasks for parent ${parent_id} and user ${user_id}: ${error.message}`);
-    return res.status(500).json({ message: "Internal server error while fetching child tasks", success: false });
+    return res.status(500).json({ message: "Internal server error while fetching child tasks", error: error.message,success: false });
   }
 
 

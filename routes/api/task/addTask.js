@@ -1,9 +1,11 @@
 import task from "../../../schema/taskSchema.js"
 import express from "express"
 import Log from "../../../logs/log.js"
+import mongoConnect from "../../../config/mongoConnect.js"
 const router = express.Router()
 
 router.post("/add", async (req, res) => {
+    await mongoConnect()
     const {parent_id,title,priority,dueDate} = req.body
     const user_id = req.user.id
     try{
@@ -25,7 +27,7 @@ router.post("/add", async (req, res) => {
     {
         console.error(error)
         await Log.LogInfo("ERROR","routes/api/task/addTask.js",`error adding task : ${error.message}`)
-        return res.status(500).send({message:"Server Error",error:error.message,success:false})  
+        return res.status(500).send({message:"Internal server error while adding task",error: error.message,success:false})  
     }
     
 })

@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken"
 import Log from "../../logs/log.js"
+import mongoConnect from "../../config/mongoConnect.js"
 
 
 const Authorization = async(req,res,next)=>{
+    await mongoConnect()
     const authHeader = req.headers.authorization
 
 

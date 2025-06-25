@@ -2,6 +2,7 @@ import express from "express";
 import userProfile from "../../schema/userSchema.js";
 import bcrypt from 'bcrypt';
 import Log from "../../logs/log.js";
+import mongoConnect from "../../config/mongoConnect.js";
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ function signupSanityCheck(req, res) {
 }
 
 router.post('/signup', async (req, res) => {
+    await mongoConnect()
     try {
         if (!signupSanityCheck(req, res)) {
             return;
@@ -55,7 +57,7 @@ router.post('/signup', async (req, res) => {
         if (error.code === 11000) {
             return res.status(409).json({ success: false, message: "Email already exists" });
         } else {
-            return res.status(500).json({ success: false, message: error.message });
+            return res.status(500).json({ success: false, message: "An unexpected error occurred. Please try again later.",error: error.message });
         }
     }
 });

@@ -3,11 +3,13 @@ const router = express.Router()
 import userProfile from "../../schema/userSchema.js"
 import Log from "../../logs/log.js"
 import jwt from "jsonwebtoken"
+import mongoConnect from "../../config/mongoConnect.js"
 
 
 
 
 router.post('/refreshAccesstoken',async (req,res)=>{
+    await mongoConnect()
     const {refreshToken}= req.body
       if (!refreshToken) {
             return res.status(400).json({
@@ -48,7 +50,7 @@ router.post('/refreshAccesstoken',async (req,res)=>{
 
     }
     catch (error) {
-        res.status(500).json({message:error.message,success:false})
+        res.status(500).json({message:"An unexpected error occurred. Please try again later.",error: error.message,success:false})
         
     }
 })

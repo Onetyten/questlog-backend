@@ -6,7 +6,7 @@ import crypto from "crypto"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import Log from "../../logs/log.js"
-
+import mongoConnect from "../../config/mongoConnect.js"
 
 
 
@@ -18,6 +18,7 @@ app.use(express.json())
 
 
 router.post('/signin',async(req,res)=>{
+    await mongoConnect()
     try {
         if (!signinSanity(req,res)) return
         const {email,password} = req.body
@@ -53,7 +54,7 @@ router.post('/signin',async(req,res)=>{
     }
     
     catch (error) {
-        res.status(500).json({message:error.message,success:false})
+        res.status(500).json({message:"An unexpected error occurred. Please try again later.",error: error.message,success:false})
          await Log.LogInfo("ERROR", "signin.js", `Error during sign in : ${error.message}`)
     }
 

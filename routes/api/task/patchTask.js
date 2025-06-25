@@ -1,10 +1,12 @@
 import express from "express"
 import task from "../../../schema/taskSchema.js"
 import Log from "../../../logs/log.js"
+import mongoConnect from "../../../config/mongoConnect.js"
 
 const router = express.Router()
 
 router.patch("/edit/:_id", async (req, res) => {
+    await mongoConnect()
     const { title,parent_id,status,priority,dueDate } = req.body
     const _id = req.params._id
     
@@ -93,7 +95,7 @@ router.patch("/edit/:_id", async (req, res) => {
     catch (error) {
         console.error("Error updating tasks",error)
         await Log.LogInfo("ERROR","routes/api/task/patchTask.js",`Error updating tasks: ${error.message}`)
-        return res.status(500).json({message:"Error updating tasks", success:false})
+        return res.status(500).json({message:"Error updating tasks",error: error.message, success:false})
         
     }
 })

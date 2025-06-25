@@ -1,10 +1,12 @@
 import express from "express"
 import task from "../../../schema/taskSchema.js"
 import Log from "../../../logs/log.js"
+import mongoConnect from "../../../config/mongoConnect.js"
 
 const router = express.Router()
 
 router.get("/fetch", async (req, res) => {
+    await mongoConnect()
     try {
         const sortBy = req.query.sortBy || "createdAt"
         const order = req.query.order === "desc"? - 1 : 1
@@ -59,7 +61,7 @@ router.get("/fetch", async (req, res) => {
     }
     catch (error) {
         console.error(error)
-        res.status(500).json({message:"Internal server error",success:false})
+        res.status(500).json({message:"Internal server error while fetching tasks", error: error.message ,success:false})
         await Log.LogInfo("ERROR","routes/api/task/fetchTask.js",`Error fetching tasks: ${error.message}`)
     }
 

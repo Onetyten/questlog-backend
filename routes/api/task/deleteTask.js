@@ -1,6 +1,7 @@
 import task from "../../../schema/taskSchema.js";
 import express from "express";
 import Log from "../../../logs/log.js";
+import mongoConnect from "../../../config/mongoConnect.js";
 const router = express.Router();
 
 async function getsubTasks(task_id, user_id) {
@@ -16,6 +17,7 @@ async function getsubTasks(task_id, user_id) {
 }
 
 router.delete("/delete/:_id", async (req, res) => {
+  await mongoConnect()
   try {
     const { _id } = req.params;
     const user_id = req.user.id;
